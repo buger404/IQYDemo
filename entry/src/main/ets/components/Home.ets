@@ -1,4 +1,5 @@
 import { CyVideo } from '../../entry/CyVideo'
+import { http } from '@kit.NetworkKit'
 
 const menuList : string[] =
   ['直播', '首页', '热点', '电视剧', '电影', '娱乐', '小说']
@@ -20,24 +21,32 @@ const menuList : string[] =
 @Component
 export struct Home {
   @State currentMenu : number = 1
-  @State videoList : CyVideo[] = [
-    new CyVideo(1, $r('app.media.s1'), '琅琊榜之风起长林', '观看至第49集'),
-    new CyVideo(2, $r('app.media.s2'), '城中之城', '天塌了苏见仁撞见赵辉周琳暖昧'),
-    new CyVideo(3, $r('app.media.s3'), '乘风踏浪', '贾为民卖布料孤立彭家人'),
-    new CyVideo(4, $r('app.media.s4'), '旺卡', '哈利波特团队全新IP'),
-    new CyVideo(5, $r('app.media.s5'), '狂飙·正义接力', '张译张颂文黑白较量'),
-    new CyVideo(6, $r('app.media.s6'), '超意神探', '港星齐聚上演强爽追凶'),
-    new CyVideo(7, $r('app.media.s7'), '追风者·信念如磐', '王一博李沁坚定前行'),
-    new CyVideo(8, $r('app.media.s8'), '种地吧第2季', '赵一博再对李耕耘做啾咪'),
-    new CyVideo(9, $r('app.media.s9'), '种地吧第2季', '赵一博少熙劝架插不上话'),
-    new CyVideo(10, $r('app.media.s10'), '五哈第4季', '鹿晗猛泼邓超泼上头了'),
-    new CyVideo(11, $r('app.media.s11'), '幸运旅行家', '宋轶马伯骞“衰神”附体'),
-    new CyVideo(12, $r('app.media.s12'), '萌探2024·抢先看', '这么刺激？黄子韬高喊救命'),
-    new CyVideo(13, $r('app.media.s13'), '新说唱2024', 'rapper上大分'),
-    new CyVideo(14, $r('app.media.s14'), '17号音乐仓库第2季', '房东的猫致敬张雨生'),
-    new CyVideo(15, $r('app.media.s15'), '王牌对王牌·精编', '沙溢杨迪被泼成蓄水池'),
-    new CyVideo(16, $r('app.media.s16'), '萌探探探案第3季', '赵丽颖孙红雷扭得太欢啦')
-  ]
+  @State videoList : CyVideo[] = []
+
+  aboutToAppear(): void {
+    console.log('home 页面被创建力')
+    let client = http.createHttp()
+    client.request('http://8.134.96.242/movie/list.json', {
+      method: http.RequestMethod.GET
+    }).then(resp => {
+      console.log('已成功获取电影信息')
+      let result = resp.result
+      console.log('Json 内容：' + result)
+      let list : CyVideo[] = JSON.parse('' + result)
+      this.videoList = list
+      console.log(JSON.stringify(this.videoList))
+    }).catch((err : Error) => {
+      console.log('获取失败：' + err.message + '\n' + err.stack)
+    })
+  }
+
+  onPageShow(): void {
+    console.log('home 页面显示了')
+  }
+
+  onPageHide(): void {
+    console.log('home 页面隐藏了')
+  }
 
   build() {
     Column(){
