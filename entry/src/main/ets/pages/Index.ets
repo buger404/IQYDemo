@@ -47,6 +47,7 @@ struct Index {
     }
     .backgroundColor(Color.Black)
     .barHeight(70)
+    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP])
     .onChange((index: number) => {
       this.currentIndex = index
     })

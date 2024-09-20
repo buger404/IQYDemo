@@ -2,14 +2,14 @@ export class CyVideo{
   id : Number;
   image : Resource | string;
   title : string;
-  desc : string;
+  description : string;
   videoSrc : Resource | string;
 
   constructor(id : number, image : Resource |string, title : string, desc : string, videoSrc : Resource | string = ''){
     this.id = id;
     this.title = title;
     this.image = image;
-    this.desc = desc;
+    this.description = desc;
     this.videoSrc = videoSrc;
   }
 }

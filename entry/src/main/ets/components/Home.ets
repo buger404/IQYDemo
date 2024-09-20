@@ -1,5 +1,6 @@
 import { CyVideo } from '../../entry/CyVideo'
 import { http } from '@kit.NetworkKit'
+import { router } from '@kit.ArkUI'
 
 const menuList : string[] =
   ['直播', '首页', '热点', '电视剧', '电影', '娱乐', '小说']
@@ -135,10 +136,19 @@ export struct Home {
                   .fontColor(Color.White)
                   .fontSize(14)
                   .margin({top: 5, bottom: 5})
-                Text(v.desc)
+                Text(v.description)
                   .fontColor(Color.Gray)
                   .fontSize(11)
               }
+              .onClick((event) => {
+                console.log('点击了视频')
+                router.replaceUrl({
+                  url: 'pages/Detail',
+                  params: {
+                    videoID: v.id
+                  }
+                }, router.RouterMode.Single)
+              })
               .padding({
                 left: i % 2 == 0 ? 15 : 7.5,
                 right: i % 2 == 0 ? 7.5 : 15,
@@ -163,6 +173,7 @@ export struct Home {
       direction: GradientDirection.Bottom,
       colors: [[0x194b26, 0.0], [0x111214, 0.2]]
     })
+    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP])
     .height('100%')
   }
 }
