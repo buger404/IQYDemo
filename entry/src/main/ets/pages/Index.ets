@@ -1,4 +1,5 @@
 import { Home } from '../components/Home'
+import { User } from '../components/User'
 
 @Entry
 @Component
@@ -41,7 +42,7 @@ struct Index {
       }
       .tabBar(this.navigatorBar(3, $r('app.media.vip'), '会员'))
       TabContent(){
-        Text("第5个页面")
+        User()
       }
       .tabBar(this.navigatorBar(4, $r('app.media.user'), '我的'))
     }
