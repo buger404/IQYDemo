@@ -1,5 +1,6 @@
 import { Home } from '../components/Home'
 import { User } from '../components/User'
+import { Discover } from '../components/Discover'
 
 @Entry
 @Component
@@ -30,17 +31,9 @@ struct Index {
       }
       .tabBar(this.navigatorBar(0, $r('app.media.home'), '首页'))
       TabContent(){
-        Text("这是第二个页面")
-      }
-      .tabBar(this.navigatorBar(1, $r('app.media.random'), '随意视频'))
-      TabContent(){
-        Text("第三个页面")
+        Discover()
       }
       .tabBar(this.navigatorBar(2, $r('app.media.discover'), '发现'))
-      TabContent(){
-        Text("第四个页面")
-      }
-      .tabBar(this.navigatorBar(3, $r('app.media.vip'), '会员'))
       TabContent(){
         User()
       }
