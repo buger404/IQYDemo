@@ -111,7 +111,7 @@ struct Detail{
       Column(){
         if (this.videoInfo){
           Video({
-            src: this.videoInfo.videoSrc
+            src: $r('app.media.sp')
           }).height(200)
             .width('100%')
         }

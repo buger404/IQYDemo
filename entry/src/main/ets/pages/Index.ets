@@ -33,11 +33,11 @@ struct Index {
       TabContent(){
         Discover()
       }
-      .tabBar(this.navigatorBar(2, $r('app.media.discover'), '发现'))
+      .tabBar(this.navigatorBar(1, $r('app.media.discover'), '发现'))
       TabContent(){
         User()
       }
-      .tabBar(this.navigatorBar(4, $r('app.media.user'), '我的'))
+      .tabBar(this.navigatorBar(2, $r('app.media.user'), '我的'))
     }
     .backgroundColor(Color.Black)
     .barHeight(70)
